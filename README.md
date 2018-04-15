@@ -25,3 +25,10 @@
 
 `eslint --init`
 Airbnb -> json
+
+2.  2-setup-project-base
+
+* refactory folder
+* update app.json add flash screen
+* update app/index.js loading assets
+* add assets file images and fonts
