@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, YellowBox } from 'react-native';
-import { Font, AppLoading } from 'expo';
+import { Font } from 'expo';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-// ignore yellow box warning in emulator
+import Routes from './components/Routes';
+import { Loading } from './components/Loading';
 
-YellowBox.ignoreWarnings(['Warning:...']);
+console.disableYellowBox = true;
 
 EStyleSheet.build({
   $primary: '#2552AC',
@@ -15,37 +16,13 @@ EStyleSheet.build({
 });
 
 export default class App extends Component {
-  state = { isReady: false };
-  async _loadAssetsAsync() {
-    const fontAssets = Font.loadAsync({
-      'Raleway-Bold': require('../assets/fonts/Raleway-Bold.ttf'),
-    });
-
-    await this.Promise.all([...fontAssets]);
-  }
+  state = { isReady: true };
 
   render() {
     if (!this.state.isReady) {
-      return (
-        <AppLoading
-          startAsync={this._loadAssetsAsync}
-          onFinish={() => this.setState({ isReady: true })}
-          onError={console.warn}
-        />
-      );
+      return <Loading />;
     }
 
-    return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          font: 'Raleway-Bold',
-        }}
-      >
-        <Text>Hello from React modify!</Text>
-      </View>
-    );
+    return <Routes />;
   }
 }

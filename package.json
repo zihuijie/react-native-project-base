@@ -21,6 +21,7 @@
     "create-react-context": "^0.2.2",
     "expo": "^26.0.0",
     "firebase": "^4.12.1",
+    "history": "^4.7.2",
     "moment": "^2.22.0",
     "native-base": "^2.4.2",
     "prop-types": "^15.6.1",

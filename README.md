@@ -32,3 +32,8 @@ Airbnb -> json
 * update app.json add flash screen
 * update app/index.js loading assets
 * add assets file images and fonts
+
+3.  3-setup-firebase
+
+* create screens
+* setup loading spinner
