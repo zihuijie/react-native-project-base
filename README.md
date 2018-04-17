@@ -37,3 +37,8 @@ Airbnb -> json
 
 * create screens
 * setup loading spinner
+* Context Api
+* Add firebase for login and signup
+* react-router-native switch between auth and nonauth route
+
+4.  4-setup-database

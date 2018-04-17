@@ -5,7 +5,7 @@ import { Keyboard, KeyboardAvoidingView, View, Text } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base';
 import { Link, withRouter } from 'react-router-native';
 
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import styles from './styles';
 
 const INITIAL_STATE = {
@@ -22,6 +22,7 @@ class SignUp extends Component {
       ...INITIAL_STATE,
     };
   }
+
   isValid() {
     const {
       userName, email, password, confirmPassword, error,
@@ -42,11 +43,15 @@ class SignUp extends Component {
   }
   handleSignup() {
     const { userName, email, password } = this.state;
+
     auth
       .doCreateUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        this.setState(() => ({ ...INITIAL_STATE }));
-        this.props.history.push('/');
+        // create user
+        db.doCreateUser(authUser.uid, userName, email).then(() => {
+          this.setState(() => ({ ...INITIAL_STATE }));
+          this.props.history.push('/');
+        });
       })
       .catch((error) => {
         this.setState({ error });
