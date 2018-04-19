@@ -1,5 +1,3 @@
-import Loading from './Loading';
+import Loading from "./Loading";
 
-import styles from './styles';
-
-export { Loading, styles };
+export { Loading };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { Button } from "native-base";
-import { Link } from "react-router-native";
+
 import styles from "./styles";
 
 const backgroundImage = require("../../../assets/images/splash.png");
@@ -21,9 +21,7 @@ class Landing extends React.Component {
           <Image source={backgroundImage} style={styles.backgroundImage} />
         </View>
         <Button block onPress={this._showMoreApp}>
-          <Link to="/login">
-            <Text style={styles.text}>Let's Begin</Text>
-          </Link>
+          <Text style={styles.text}>Let's Begin</Text>
         </Button>
       </View>
     );

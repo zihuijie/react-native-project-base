@@ -1,42 +1,59 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { Keyboard, KeyboardAvoidingView, StyleSheet, Text } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base';
-import { withRouter, Link } from 'react-router-native';
-import { auth } from '../../firebase';
+import {
+  AsyncStorage,
+  Keyboard,
+  KeyboardAvoidingView,
+  StyleSheet,
+  Text
+} from "react-native";
+import {
+  Container,
+  Content,
+  Header,
+  Form,
+  Input,
+  Item,
+  Button,
+  Label
+} from "native-base";
 
-import styles from './styles';
+import { auth } from "../../firebase";
+import { onSignIn } from "../../auth";
+import styles from "./styles";
 
 const INITIAL_STATE = {
-  email: '',
-  password: '',
-  error: null,
+  email: "",
+  password: "",
+  error: null
 };
-class Login extends Component {
+class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...INITIAL_STATE,
+      ...INITIAL_STATE
     };
   }
 
   handleLogin() {
     const { email, password } = this.state;
-    const { history } = this.props;
+
     auth
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState(() => ({ ...INITIAL_STATE }));
-        history.push('/');
       })
-      .catch((error) => {
+      .catch(error => {
         this.setState({ error });
       });
+
+    onSignIn().then(() => navigation.navigate("SignedIn"));
   }
+
   isValid() {
-    if (email === '' || password === '') {
+    if (email === "" || password === "") {
       this.setState({
-        error: 'Please enter in all fields!',
+        error: "Please enter in all fields!"
       });
       return false;
     }
@@ -84,14 +101,10 @@ class Login extends Component {
           primary
           block
           style={styles.button}
-          onPress={() => console.log('go to signup')}
-        >
-          <Link to="/signup">
-            <Text style={styles.text}>Go to Signup</Text>
-          </Link>
-        </Button>
+          onPress={() => console.log("go to signup")}
+        />
       </Container>
     );
   }
 }
-export default withRouter(Login);
+export default SignIn;

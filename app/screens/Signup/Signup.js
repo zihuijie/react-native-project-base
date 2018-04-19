@@ -1,41 +1,53 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { Keyboard, KeyboardAvoidingView, View, Text } from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base';
-import { Link, withRouter } from 'react-router-native';
+import { Keyboard, KeyboardAvoidingView, View, Text } from "react-native";
+import {
+  Container,
+  Content,
+  Header,
+  Form,
+  Input,
+  Item,
+  Button,
+  Label
+} from "native-base";
 
-import { auth, db } from '../../firebase';
-import styles from './styles';
+import { auth, db } from "../../firebase";
+import styles from "./styles";
 
+import { onSignIn } from "../../auth";
 const INITIAL_STATE = {
-  userName: '',
-  email: '',
-  password: '',
-  confirmPassword: '',
-  error: null,
+  userName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+  error: null
 };
 class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...INITIAL_STATE,
+      ...INITIAL_STATE
     };
   }
 
   isValid() {
-    const {
-      userName, email, password, confirmPassword, error,
-    } = this.state;
-    if (userName === '' || email === '' || password === '' || confirmPassword === '') {
+    const { userName, email, password, confirmPassword, error } = this.state;
+    if (
+      userName === "" ||
+      email === "" ||
+      password === "" ||
+      confirmPassword === ""
+    ) {
       this.setState({
-        error: 'Please enter in all fields!',
+        error: "Please enter in all fields!"
       });
       return false;
     }
     if (password !== confirmPassword) {
       this.setState({
-        error: 'Please make sure your password match!',
+        error: "Please make sure your password match!"
       });
       return false;
     }
@@ -44,18 +56,11 @@ class SignUp extends Component {
   handleSignup() {
     const { userName, email, password } = this.state;
 
-    auth
-      .doCreateUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        // create user
-        db.doCreateUser(authUser.uid, userName, email).then(() => {
-          this.setState(() => ({ ...INITIAL_STATE }));
-          this.props.history.push('/');
-        });
-      })
-      .catch((error) => {
-        this.setState({ error });
-      });
+    auth.doCreateUserWithEmailAndPassword(email, password).catch(error => {
+      this.setState({ error: error });
+    });
+
+    onSignIn().then(() => navigation.navigate("SignedIn"));
   }
 
   render() {
@@ -95,7 +100,9 @@ class SignUp extends Component {
                 secureTextEntry
                 autoCorrect={false}
                 autoCapitalize="none"
-                onChangeText={confirmPassword => this.setState({ confirmPassword })}
+                onChangeText={confirmPassword =>
+                  this.setState({ confirmPassword })
+                }
               />
             </Item>
             <Button
@@ -115,4 +122,4 @@ class SignUp extends Component {
   }
 }
 
-export default withRouter(SignUp);
+export default SignUp;

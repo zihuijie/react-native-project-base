@@ -1,3 +1,3 @@
-import Signup from './Signup';
+import SignUp from "./SignUp";
 
-export { Signup };
+export { SignUp };

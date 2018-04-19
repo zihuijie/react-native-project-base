@@ -43,4 +43,7 @@ Airbnb -> json
 
 4.  4-setup-database
 
-* convert to redux
+5.  5-redux
+    the react-router navigation not work, change to react navigation
+
+6.  6-react-navigation

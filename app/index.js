@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { YellowBox } from "react-native";
-import { Font, AppLoading } from "expo";
+import { Font } from "expo";
 import EStyleSheet from "react-native-extended-stylesheet";
-
-import Navigation from "./Navigation";
 
 import store from "./store";
 
+import { Loading } from "./components/Loading";
+
+import { Navigation } from "./navigation";
 console.disableYellowBox = true;
 
 EStyleSheet.build({
@@ -22,7 +23,16 @@ const cacheFonts = fonts => {
 };
 
 export default class App extends Component {
-  state = { isReady: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false
+    };
+  }
+  componentDidMount() {
+    this._loadAssetsAsync();
+  }
+
   async _loadAssetsAsync() {
     const fontAssets = cacheFonts([
       { RalewayExtraBold: require("../assets/fonts/Raleway-Black.ttf") },
@@ -31,19 +41,19 @@ export default class App extends Component {
       { RalewayRegular: require("../assets/fonts/Raleway-Regular.ttf") },
       { RalewayLight: require("../assets/fonts/Raleway-Light.ttf") }
     ]);
-
-    await Promise.all([...fontAssets]);
+    await Promise.all([...fontAssets])
+      .then(() => {
+        this.setState({ isReady: true });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
-
   render() {
-    if (!this.state.isReady) {
-      return (
-        <AppLoading
-          startAsync={this._loadAssetsAsync}
-          onFinish={() => this.setState({ isReady: true })}
-          onError={console.warn}
-        />
-      );
+    const { isReady } = this.state;
+
+    if (!isReady) {
+      return <Loading />;
     }
 
     return (
