@@ -1,18 +1,18 @@
-import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { Button } from 'native-base';
-import { Link } from 'react-router-native';
-import styles from './styles';
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { Button } from "native-base";
+import { Link } from "react-router-native";
+import styles from "./styles";
 
-const backgroundImage = require('../../../assets/images/splash.png');
+const backgroundImage = require("../../../assets/images/splash.png");
 
-class LandingScreen extends React.Component {
+class Landing extends React.Component {
   static navigationOptions = {
-    title: 'Welcome to the app!',
+    title: "Welcome to the app!"
   };
 
   _showMoreApp = () => {
-    console.log('go to next');
+    console.log("go to next");
   };
   render() {
     return (
@@ -30,4 +30,4 @@ class LandingScreen extends React.Component {
   }
 }
 
-export default LandingScreen;
+export default Landing;

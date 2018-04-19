@@ -42,3 +42,5 @@ Airbnb -> json
 * react-router-native switch between auth and nonauth route
 
 4.  4-setup-database
+
+* convert to redux
