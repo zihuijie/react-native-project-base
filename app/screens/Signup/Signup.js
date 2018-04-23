@@ -16,7 +16,7 @@ import {
 import { auth, db } from "../../firebase";
 import styles from "./styles";
 
-import { onSignIn } from "../../auth";
+import { onSignIn } from "../../navigation/auth";
 const INITIAL_STATE = {
   userName: "",
   email: "",

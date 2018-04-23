@@ -47,3 +47,7 @@ Airbnb -> json
     the react-router navigation not work, change to react navigation
 
 6.  6-react-navigation
+
+7.  7-map
+
+8.  8-chat

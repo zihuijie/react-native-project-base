@@ -8,7 +8,8 @@ import store from "./store";
 
 import { Loading } from "./components/Loading";
 
-import { Navigation } from "./navigation";
+// import Navigation from "./navigation";
+import { MapScreen } from "./screens";
 console.disableYellowBox = true;
 
 EStyleSheet.build({
@@ -58,7 +59,7 @@ export default class App extends Component {
 
     return (
       <Provider store={store}>
-        <Navigation />
+        <MapScreen />
       </Provider>
     );
   }

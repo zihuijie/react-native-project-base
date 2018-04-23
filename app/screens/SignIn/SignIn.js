@@ -19,7 +19,7 @@ import {
 } from "native-base";
 
 import { auth } from "../../firebase";
-import { onSignIn } from "../../auth";
+import { onSignIn } from "../../navigation/auth";
 import styles from "./styles";
 
 const INITIAL_STATE = {

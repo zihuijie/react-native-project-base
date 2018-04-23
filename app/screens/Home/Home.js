@@ -9,7 +9,7 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>This is dashboard</Text>
+        <Text>This is home</Text>
       </View>
     );
   }
